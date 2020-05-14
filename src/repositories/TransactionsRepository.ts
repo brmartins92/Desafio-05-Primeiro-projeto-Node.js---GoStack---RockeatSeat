@@ -25,7 +25,7 @@ class TransactionsRepository {
   }
 
   public getBalance(): Balance {
-    const balance = this.transactions.reduce((accumulator: Balance,transaction: Transaction) =>  {
+    const {income,outcome,total} = this.transactions.reduce((accumulator: Balance,transaction: Transaction) =>  {
       
       if(transaction.type=="income"){
         accumulator.income += transaction.value;
@@ -43,7 +43,7 @@ class TransactionsRepository {
     })
    
 
-    return balance;
+    return {income,outcome,total};
   }
 
   public create({title,value,type}: TransactionInterface ) : Transaction {
